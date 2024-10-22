@@ -30,6 +30,7 @@ git commit -m "Add protobuf as submodule"
 git push origin main
 ```
 5. 서브 모듈 내 있는 .proto 파일을 이용해 pb.go 파일을 생성
-6. 
+6. 각 서버에서 pb.go 내에 있는 파일 사용하게 하기
+7. 
 
 ***
