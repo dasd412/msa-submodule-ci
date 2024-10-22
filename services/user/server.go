@@ -12,6 +12,7 @@ func main() {
 		FirstName: "test",
 		Age:       31,
 		Birthday:  "2022-01-01",
+		Address:   "test",
 	}
 	log.Println(user.Id, user.FirstName, user.LastName, user.Age)
 }
