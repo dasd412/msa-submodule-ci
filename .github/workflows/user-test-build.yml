@@ -1,4 +1,4 @@
-name: CI test for submodule check
+name: User CI test for submodule check
 
 on:
   push:
