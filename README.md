@@ -28,7 +28,8 @@ git submodule add https://github.com/dasd412/msa-submodule-protobuf.git protobuf
 git add .gitmodules protobuf
 git commit -m "Add protobuf as submodule"
 git push origin main
-
 ```
+5. 서브 모듈 내 있는 .proto 파일을 이용해 pb.go 파일을 생성
+6. 
 
 ***
