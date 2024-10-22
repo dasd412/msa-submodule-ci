@@ -15,10 +15,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show current submodule versions (local)
+        run: |
+          echo "Current submodule versions (local):"
+          git submodule status
+
       - name: Checkout repository with submodules
         uses: actions/checkout@v3
         with:
           submodules: true  # 서브모듈까지 포함하여 체크아웃
+
+
+      - name: Show updated submodule versions (remote)
+        run: |
+          echo "Updated submodule versions (remote):"
+          git submodule status
+          
 
       - name: Update submodules to latest version
         run: git submodule update --remote
