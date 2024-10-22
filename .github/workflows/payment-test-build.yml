@@ -1,0 +1,30 @@
+name: CI test for submodule check
+
+on:
+  push:
+    paths:
+      - 'services/payment/**'
+      - '.github/workflows/payment-test-build.yml'
+    branches:
+      - 'main'
+jobs:
+  check_submodule_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository with submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: true  # 서브모듈까지 포함하여 체크아웃
+
+      - name: Update submodules to latest version
+        run: git submodule update --remote
+
+      - name: Check for submodule changes in all microservices
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            echo "Submodule version mismatch detected!"
+            exit 1
+          else
+            echo "All submodules are up to date."
+          fi
