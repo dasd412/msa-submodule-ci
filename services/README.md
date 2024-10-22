@@ -15,3 +15,16 @@ MSA에서 protobuf 서브 모듈을 사용하는 상황이라고 가정하자.
 
 이러한 문제를 방지하기 위해, 서브 모듈의 버전이 최신인지 체크하기 위한 CI를 테스트해보려 한다.
 
+***
+
+# 절차
+1. git 메인 프로젝트 추가 및 구성
+2. git submodule 리포지토리 추가 및 구성
+3. git 메인 프로젝트에 .gitmodules 구성
+4. git 메인 프로젝트에서 다음 명령어 실행
+```
+git clone https://github.com/dasd412/msa-submodule-protobuf.git protobuf
+
+```
+
+***
