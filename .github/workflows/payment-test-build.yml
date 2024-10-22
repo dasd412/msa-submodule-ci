@@ -21,14 +21,38 @@ jobs:
         with:
           submodules: true  # 서브모듈까지 포함하여 체크아웃
 
-      - name: Update submodules to latest version
-        run: git submodule update --remote
-
-      - name: Check for submodule changes in all microservices
+      - name: Save current submodule versions (local)
+        id: save_local
         run: |
-          if [[ -n $(git status --porcelain) ]]; then
-            echo "Submodule version mismatch detected!"
-            exit 1
+          echo "Saving current submodule versions (local)..."
+          LOCAL_STATUS=$(git submodule status)
+          echo "Local submodule status:"
+          echo "$LOCAL_STATUS"
+          echo "::set-output name=local_status::$LOCAL_STATUS"
+      - name: Update submodules to latest version
+        run: |
+          echo "Updating submodules to the latest remote version..."
+          git submodule update --remote
+
+      - name: Save updated submodule versions (remote)
+        id: save_remote
+        run: |
+          echo "Saving updated submodule versions (remote)..."
+          REMOTE_STATUS=$(git submodule status)
+          echo "Remote submodule status:"
+          echo "$REMOTE_STATUS"
+          echo "::set-output name=remote_status::$REMOTE_STATUS"
+
+      - name: Compare submodule versions
+        run: |
+          echo "Comparing local and remote submodule versions..."
+          if [ "${{ steps.save_local.outputs.local_status }}" = "${{ steps.save_remote.outputs.remote_status }}" ]; then
+            echo "Submodules are up to date."
           else
-            echo "All submodules are up to date."
+            echo "Submodule version mismatch detected!"
+            echo "Local submodule status:"
+            echo "${{ steps.save_local.outputs.local_status }}"
+            echo "Remote submodule status:"
+            echo "${{ steps.save_remote.outputs.remote_status }}"
+            exit 1
           fi
