@@ -24,6 +24,10 @@ MSA에서 protobuf 서브 모듈을 사용하는 상황이라고 가정하자.
 4. git 메인 프로젝트에서 다음 명령어 실행
 ```
 git clone https://github.com/dasd412/msa-submodule-protobuf.git protobuf
+git submodule add https://github.com/dasd412/msa-submodule-protobuf.git protobuf
+git add .gitmodules protobuf
+git commit -m "Add protobuf as submodule"
+git push origin main
 
 ```
 
