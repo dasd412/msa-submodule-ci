@@ -7,6 +7,9 @@ on:
       - '.github/workflows/payment-test-build.yml'
     branches:
       - 'main'
+    tags:
+      - '*'  # 모든 태그 푸시 시 실행
+
 jobs:
   check_submodule_version:
     runs-on: ubuntu-latest
